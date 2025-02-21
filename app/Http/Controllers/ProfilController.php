@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
 class ProfilController extends Controller
@@ -43,4 +44,19 @@ class ProfilController extends Controller
 
         return redirect()->back()->with('success', 'Profil mis à jour avec succès.');
     }
+    
+    public function delete(Request $request)
+    {    
+        $user = Auth::user();
+    
+        Auth::logout(); 
+    
+        $user->delete(); 
+    
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        return redirect('/')->with('success', 'تم حذف الحساب بنجاح.');
+    }
+    
 }

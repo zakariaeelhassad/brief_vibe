@@ -17,6 +17,10 @@
 
             <!-- Profile Button -->
             <div>
+                <form method="POST" action="{{route('logout')}}">
+                    @csrf
+                        <button class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">logout</button>
+                    </form>
                 <a href="/Vibe.test/public/modificationProfil" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">Profile</a>
             </div>
         </div>
@@ -93,6 +97,14 @@
                     Update Profile
                 </button>
             </div>
+        </form>
+
+        <form action="{{ route('profile.delete') }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                Delete user
+            </button>
         </form>
         
     </div>

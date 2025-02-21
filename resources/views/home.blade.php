@@ -15,10 +15,12 @@
         <div class="flex justify-between items-center max-w-7xl mx-auto">
             <!-- Home Link -->
             <a href="#" class="text-white text-lg font-semibold">Home</a>
-            @guest
-            <a href="/Vibe.test/public/login" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">login</a>
-            <a href="/Vibe.test/public/signup" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">signup</a>
-            @endguest
+            <div>
+                @guest
+                <a href="/Vibe.test/public/login" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">login</a>
+                <a href="/Vibe.test/public/signup" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">signup</a>
+                @endguest
+            </div>
             @auth
             <div>
                 <form method="POST" action="{{route('logout')}}">
@@ -31,6 +33,7 @@
         </div>
     </nav>
 
+    @auth
     <div class="flex justify-center items-center mt-4">
         <form method="GET" action="{{ route('search') }}" class="relative w-full max-w-lg">
             <input type="text" name="query" value="{{ old('query', $query ?? '') }}" placeholder="Search users..." 
@@ -39,8 +42,8 @@
                 <i class="fa fa-search">search</i>
             </button>
         </form>
-    </div>
-    
+    </div>     
+    @endauth
 
     <!-- Main Content -->
     <div class="py-12">
@@ -59,7 +62,7 @@
                                     <i class="fas fa-envelope text-gray-500 mr-1"></i> Email
                                 </th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                                    <i class="fas fa-user-tag text-gray-500 mr-1"></i> Role
+                                    <i class="fas fa-user-tag text-gray-500 mr-1"></i> Updated at
                                 </th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                                     <i class="fas fa-calendar text-gray-500 mr-1"></i> Created At
@@ -81,7 +84,7 @@
                                         <div class="text-sm text-gray-900">{{ $user->email }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ $user->role ?? 'No Role Assigned' }}</div>
+                                        <div class="text-sm text-gray-900">{{ $user->updated_at }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ $user->created_at->format('d/m/Y') }}

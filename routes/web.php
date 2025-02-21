@@ -47,6 +47,8 @@ Route::post('/logout', [sessionController::class, 'destroy'])
 
 Route::put('/profile/update', [ProfilController::class, 'update'])->name('profile.update');
 
+Route::delete('/profile', [ProfilController::class , 'delete'])->name('profile.delete');
+
 
 // Route::post('/', function(){
 
