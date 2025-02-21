@@ -56,7 +56,7 @@ class ProfilController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
     
-        return redirect('/')->with('success', 'تم حذف الحساب بنجاح.');
+        return redirect('/')->with('success');
     }
     
 }
