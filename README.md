@@ -20,8 +20,6 @@ Vibe est une plateforme de réseautage social moderne et sécurisée, conçue po
 
 ### Fonctionnalités Sociales
 - 🔍 Recherche avancée d'utilisateurs (par pseudo ou email)
-- 👥 Gestion des amis (ajout, acceptation, refus)
-- 🔔 Notifications en temps réel pour les demandes d'amitié
 
 ## 🛠 Technologies Utilisées
 
@@ -114,22 +112,3 @@ vibe/
 │   └── js/
 └── routes/
 ```
-
-## 👥 Contribution
-
-Les contributions sont les bienvenues ! N'hésitez pas à :
-1. Fork le projet
-2. Créer votre branche (`git checkout -b feature/AmazingFeature`)
-3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
-
-## 📝 License
-
-Distribué sous la licence MIT. Voir `LICENSE` pour plus d'informations.
-
-## 📞 Contact
-
-Vibe Team - [@VibeTeam](https://twitter.com/vibeteam)
-
-Lien du projet: [https://github.com/votre-username/vibe](https://github.com/votre-username/vibe)
