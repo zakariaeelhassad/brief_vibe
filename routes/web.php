@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\AfichageProfilController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\commentController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MonPosteController;
+use App\Http\Controllers\PosteController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\sessionController;
 use App\Models\User;
@@ -37,6 +42,9 @@ Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/signup' , [AuthController::class , 'create']);
 Route::post('/register' , [AuthController::class , 'register']);
 
+Route::get('/monPost' , [MonPosteController::class , 'create'])->middleware('auth');
+Route::post('/monPost', [MonPosteController::class, 'store'])->middleware('auth')->name('monPost');
+
 Route::get('/login' , [sessionController::class , 'create']);
 Route::post('/login' , [sessionController::class , 'store']);
 
@@ -49,24 +57,23 @@ Route::put('/profile/update', [ProfilController::class, 'update'])->name('profil
 
 Route::delete('/profile', [ProfilController::class , 'delete'])->name('profile.delete');
 
-
-// Route::post('/', function(){
-
-//     request()->validate([
-//         'name' => ['required', 'string', 'min:3'],
-//         'email' => ['required' , 'string', 'lowercase', 'email', 'max:255'],
-//         'password' => ['required']
-//     ]);
-
-//     user::create([
-//         'name'=> request('name'),
-//         'email'=>request('email'),
-//         'password'=>request(('password'))
-//     ]);
-
-//     return redirect(('/login'));
-// });
-
-
-
 Route::get('/home', [HomeController::class, 'index']);
+
+Route::post('/home/{userId}', [FollowController::class, 'follow']);
+
+Route::middleware('auth')->group(function(){
+    Route::post('follow/{userId}' , [FollowController::class , 'follow'])->name('follow');
+    Route::post('/follow/accept/{userId}', [FollowController::class, 'acceptFollow'])->name('acceptFollow');
+    Route::post('/follow/reject/{userId}', [FollowController::class, 'rejectFollow'])->name('rejectFollow');
+    Route::get('/follow/requests', [FollowController::class, 'pendingRequests'])->name('follow.requests');
+    Route::get('/friends', [FollowController::class, 'friendsList'])->name('friends.list');
+});
+
+Route::get('/post' , [PosteController::class , 'create']);
+Route::get('/profil/{id}', [AfichageProfilController::class, 'profil'])->name('profil.show');
+
+Route::post('/post/{id}/like', [PosteController::class, 'likePost'])->name('post.like');
+
+Route::post('/post/{id}/comment', [commentController::class, 'store'])->name('post.comment');
+
+

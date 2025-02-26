@@ -31,7 +31,7 @@
             Your browser does not support the video tag.
         </video>
         <div class="fixed top-[17%] right-0 h-screen w-[30vw] bg-[#0e1111] text-gray-100 font-[Jura]">
-            <form class="max-w-md mx-auto p-8" action="/Vibe.test/public/login" method="POST">
+            <form class="max-w-md mx-auto p-8" action="/login" method="POST">
                 @csrf
                 <h2 class="text-4xl font-extrabold mb-6 text-center text-blue-400">Login</h2>
                 <div class="mb-4">
@@ -43,7 +43,7 @@
                     <input type="password" name="password" id="password" class="block w-full px-4 py-2 border border-gray-700 bg-[#1a1f24] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="mb-4 text-center">
-                    <a href="/Vibe.test/public/signup" class="text-sm text-blue-400 hover:text-blue-500 hover:underline">
+                    <a href="/signup" class="text-sm text-blue-400 hover:text-blue-500 hover:underline">
                         Don't have an account?
                     </a>
                 </div>

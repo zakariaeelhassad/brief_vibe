@@ -1,30 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profile Edit</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-</head>
-<body class="bg-gray-100">
+@extends('layouts.app')
 
-    <nav class="bg-indigo-600 p-4">
-        <div class="flex justify-between items-center max-w-7xl mx-auto">
-            <!-- Home Link -->
-            <a href="/Vibe.test/public/home" class="text-white text-lg font-semibold">Home</a>
+@section('title', 'Dashboard')
 
-            <!-- Profile Button -->
-            <div>
-                <form method="POST" action="{{route('logout')}}">
-                    @csrf
-                        <button class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">logout</button>
-                    </form>
-                <a href="/Vibe.test/public/modificationProfil" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">Profile</a>
-            </div>
-        </div>
-    </nav>
+@section('content')
 
     <div class="max-w-7xl mx-auto p-6">
         <h2 class="font-semibold text-2xl text-gray-800 mb-6">Edit Profile</h2>
@@ -109,9 +87,11 @@
         
     </div>
 
+    
+
     <script>
         function previewImage(event) {
-            let file = event.target.files[0]; // Récupérer l'image sélectionnée
+            let file = event.target.files[0]; 
             if (file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
@@ -122,5 +102,4 @@
         }
     </script>
 
-</body>
-</html>
+@endsection

@@ -1,37 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-</head>
-<body class="bg-gray-100">
+@extends('layouts.app')
 
-    <!-- Navbar -->
-    <nav class="bg-indigo-600 p-4">
-        <div class="flex justify-between items-center max-w-7xl mx-auto">
-            <!-- Home Link -->
-            <a href="#" class="text-white text-lg font-semibold">Home</a>
-            <div>
-                @guest
-                <a href="/Vibe.test/public/login" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">login</a>
-                <a href="/Vibe.test/public/signup" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">signup</a>
-                @endguest
-            </div>
-            @auth
-            <div>
-                <form method="POST" action="{{route('logout')}}">
-                @csrf
-                    <button class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">logout</button>
-                </form>
-                <a href="/Vibe.test/public/modificationProfil" class="text-white bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">Profile</a>
-            </div>
-            @endauth
-        </div>
-    </nav>
+@section('title', 'Dashboard')
+
+@section('content')
 
     @auth
     <div class="flex justify-center items-center mt-4">
@@ -62,10 +33,10 @@
                                     <i class="fas fa-envelope text-gray-500 mr-1"></i> Email
                                 </th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                                    <i class="fas fa-user-tag text-gray-500 mr-1"></i> Updated at
+                                    <i class="fas fa-user-tag text-gray-500 mr-1"></i>Created At
                                 </th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                                    <i class="fas fa-calendar text-gray-500 mr-1"></i> Created At
+                                    <i class="fas fa-calendar text-gray-500 mr-1"></i> 
                                 </th>
                             </tr>
                         </thead>
@@ -74,7 +45,9 @@
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <img src="{{ asset('storage/'.$user->profile_picture) }}" alt="{{ $user->profile_picture }}" class="w-6 h-6 rounded-full">
+                                            <a href="{{ route('profil.show', ['id' => $user->id]) }}">
+                                                <img src="{{ asset('storage/'.$user->profile_picture) }}" alt="{{ $user->profile_picture }}" class="w-6 h-6 rounded-full">
+                                            </a>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">{{ $user->name }}</div>
                                             </div>
@@ -84,11 +57,16 @@
                                         <div class="text-sm text-gray-900">{{ $user->email }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ $user->updated_at }}</div>
+                                        <div class="text-sm text-gray-900">{{ $user->created_at->format('d/m/Y') }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $user->created_at->format('d/m/Y') }}
-                                    </td>
+                                    @auth
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <form action="{{ route('follow' , $user->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="mt-6 inline-block bg-indigo-600 text-white py-2 px-6 rounded-lg text-lg hover:bg-indigo-700 transition duration-300">Follow</button>
+                                            </form>                                            
+                                        </td>
+                                    @endauth
                                 </tr>
                             @endforeach
                         </tbody>
@@ -99,5 +77,4 @@
         </div>
     </div>
 
-</body>
-</html>
+@endsection

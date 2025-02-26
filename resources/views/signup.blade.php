@@ -17,7 +17,7 @@
 <body class="overflow-x-hidden bg-[#0e1111]">
     <div class="flex flex-row bg-[#0e1111]">
         <div class="fixed top-[10%] right-0 h-screen w-[30vw] bg-[#0e1111] text-gray-100 font-[Jura]">
-            <form class="max-w-md mx-auto p-8" action="/Vibe.test/public/register" method="POST">
+            <form class="max-w-md mx-auto p-8" action="/register" method="POST">
                 @csrf
                 <h2 class="text-4xl font-extrabold mb-6 text-center text-blue-400">Signup</h2>
                 <div class="mb-4">
@@ -34,7 +34,7 @@
                     <div id="password-indicator" class="mt-2 text-sm text-gray-400"></div>
                 </div>
                 <div class="mb-4 text-center">
-                    <a href="/Vibe.test/public/login" class="text-sm text-blue-400 hover:text-blue-500 hover:underline">
+                    <a href="/login" class="text-sm text-blue-400 hover:text-blue-500 hover:underline">
                         You Have An Account?
                     </a>
                 </div>
