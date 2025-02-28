@@ -17,7 +17,7 @@
                                 @foreach($friends as $friend)
                                     <li class="flex items-center gap-3 p-3 bg-gray-100 rounded-lg">
                                         <a href="{{ route('profil.show', ['id' =>  $friend->following->id ]) }}">
-                                            <img src="{{ $friend->following->profile_picture }}" 
+                                            <img src="{{ asset('storage/' . $friend->following->profile_picture) }}" 
                                                 alt="Profile Image" class="w-12 h-12 rounded-full border border-gray-300">
                                         </a>
                                         <span class="text-gray-800 font-medium text-lg">

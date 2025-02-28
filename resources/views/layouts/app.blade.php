@@ -40,7 +40,6 @@
     <nav class="sticky top-0 z-50 bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
-                <!-- Logo and left side links -->
                 <div class="flex items-center space-x-8">
                     <a href="/" class="flex items-center">
                         <div class="gradient-bg p-2 rounded-lg mr-2">
@@ -75,7 +74,6 @@
                     @endauth
                 </div>
 
-                <!-- Right side auth buttons -->
                 <div class="flex items-center space-x-4">
                     @guest
                     <a href="/login" class="px-5 py-2 text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg hover:from-blue-600 hover:to-blue-700 shadow-md transition duration-300 transform hover:scale-105">
@@ -90,10 +88,12 @@
                     <div class="flex items-center space-x-2">
                         <a href="/modificationProfil" class="relative group">
                             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 hover:bg-blue-200 transition duration-300">
-                                <i class="fas fa-user text-blue-600"></i>
+                                <img src="{{ auth()->user()->profile_picture ? asset(auth()->user()->profile_picture) : asset('images/default-profile.png') }}" 
+                                     alt="Profile Image" class="w-10 h-10 rounded-full object-cover">
                             </div>
                             <span class="absolute top-full right-0 mt-2 w-auto whitespace-nowrap px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">Mon Profil</span>
                         </a>
+                        
                         
                         <form method="POST" action="{{route('logout')}}">
                             @csrf
@@ -104,7 +104,6 @@
                     </div>
                     @endauth
                     
-                    <!-- Mobile menu button -->
                     <button class="md:hidden flex items-center p-2 rounded-md text-gray-700 hover:text-blue-600" id="mobileMenuButton">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
