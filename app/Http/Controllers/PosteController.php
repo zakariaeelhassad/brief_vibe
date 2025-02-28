@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use App\Models\Post;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class PosteController extends Controller
@@ -23,7 +24,7 @@ class PosteController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('Post', compact('posts'));
+        return view('Post', compact('posts') , compact('user'));
     }
 
 
@@ -44,6 +45,10 @@ class PosteController extends Controller
             return response()->json(['message' => 'Post liké']);
         }
     }
+
+    
+
+
 
 
 

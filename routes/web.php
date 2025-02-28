@@ -63,6 +63,7 @@ Route::post('/home/{userId}', [FollowController::class, 'follow']);
 
 Route::middleware('auth')->group(function(){
     Route::post('follow/{userId}' , [FollowController::class , 'follow'])->name('follow');
+    Route::post('/unfollow/{userId}', [FollowController::class, 'unfollow'])->name('unfollow');
     Route::post('/follow/accept/{userId}', [FollowController::class, 'acceptFollow'])->name('acceptFollow');
     Route::post('/follow/reject/{userId}', [FollowController::class, 'rejectFollow'])->name('rejectFollow');
     Route::get('/follow/requests', [FollowController::class, 'pendingRequests'])->name('follow.requests');
@@ -70,6 +71,9 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::get('/post' , [PosteController::class , 'create']);
+Route::delete('/post/{id}', [MonPosteController::class, 'delete'])->name('post.delete');
+Route::put('/post/update/{id}', [MonPosteController::class, 'update'])->name('post.update');
+
 Route::get('/profil/{id}', [AfichageProfilController::class, 'profil'])->name('profil.show');
 
 Route::post('/post/{id}/like', [PosteController::class, 'likePost'])->name('post.like');
