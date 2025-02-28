@@ -15,11 +15,22 @@
         <div class="text-left text-gray-600">
             <p class="text-sm"><strong>Email:</strong> {{ $user->email }}</p>
         </div>
-    
-        <form action="{{ route('follow' , $user->id) }}" method="POST">
-            @csrf
-            <button type="submit" class="mt-6 inline-block bg-indigo-600 text-white py-2 px-6 rounded-lg text-lg hover:bg-indigo-700 transition duration-300">Follow</button>
-        </form> 
+        @auth
+        @php
+            $isFollowing = auth()->user()->isFollowing($user->id);
+        @endphp
+
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <form action="{{ $isFollowing ? route('unfollow', $user->id) : route('follow', $user->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="mt-6 inline-block 
+                    {{ $isFollowing ? 'bg-red-600 hover:bg-red-700' : 'bg-indigo-600 hover:bg-indigo-700' }} 
+                    text-white py-2 px-6 rounded-lg text-lg transition duration-300">
+                    {{ $isFollowing ? 'Unfollow' : 'Follow' }}
+                </button>
+            </form>                                            
+        </td>
+    @endauth
     </div>
 </div>
 

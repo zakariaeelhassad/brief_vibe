@@ -5,12 +5,12 @@
 @section('content')
 
     @auth
-    <div class="flex justify-center items-center mt-4">
+    <div class="flex justify-center items-center mt-6 mb-4">
         <form method="GET" action="{{ route('search') }}" class="relative w-full max-w-lg">
-            <input type="text" name="query" value="{{ old('query', $query ?? '') }}" placeholder="Search users..." 
-                   class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <button type="submit" class="absolute top-2 right-2 px-3 py-1 text-white bg-blue-600 rounded-lg">
-                <i class="fa fa-search">search</i>
+            <input type="text" name="query" value="{{ old('query', $query ?? '') }}" placeholder="Rechercher des utilisateurs..." 
+                class="w-full px-4 py-3 border-0 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+            <button type="submit" class="absolute top-1.5 right-2 px-4 py-1.5 text-white bg-blue-600 rounded-full hover:bg-blue-700 transition duration-200">
+                <i class="fa fa-search"></i>
             </button>
         </form>
     </div>     
@@ -35,9 +35,6 @@
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                                     <i class="fas fa-user-tag text-gray-500 mr-1"></i>Created At
                                 </th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                                    <i class="fas fa-calendar text-gray-500 mr-1"></i> 
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -60,13 +57,22 @@
                                         <div class="text-sm text-gray-900">{{ $user->created_at->format('d/m/Y') }}</div>
                                     </td>
                                     @auth
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <form action="{{ route('follow' , $user->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="mt-6 inline-block bg-indigo-600 text-white py-2 px-6 rounded-lg text-lg hover:bg-indigo-700 transition duration-300">Follow</button>
-                                            </form>                                            
-                                        </td>
-                                    @endauth
+                                    @php
+                                        $isFollowing = auth()->user()->isFollowing($user->id);
+                                    @endphp
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <form action="{{ $isFollowing ? route('unfollow', $user->id) : route('follow', $user->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="mt-6 inline-block 
+                                                {{ $isFollowing ? 'bg-red-600 hover:bg-red-700' : 'bg-indigo-600 hover:bg-indigo-700' }} 
+                                                text-white py-2 px-6 rounded-lg text-lg transition duration-300">
+                                                {{ $isFollowing ? 'Unfollow' : 'Follow' }}
+                                            </button>
+                                        </form>                                            
+                                    </td>
+                                @endauth
+
                                 </tr>
                             @endforeach
                         </tbody>

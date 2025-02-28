@@ -18,8 +18,10 @@
                                 @foreach($followRequests as $request)
                                     <li class="flex items-center justify-between bg-gray-100 p-4 rounded-lg shadow-sm">
                                         <div class="flex items-center gap-4">
-                                            <img src="{{ $request->follower->profile_image ?? asset('default-avatar.png') }}" 
-                                                class="w-12 h-12 rounded-full border-2 border-gray-300" alt="User Image">
+                                            <a href="{{ route('profil.show', ['id' => $request->follower->id]) }}">
+                                                <img src="{{ $request->follower->profile_picture }}" 
+                                                    class="w-12 h-12 rounded-full border-2 border-gray-300" alt="profile_picture">
+                                            </a>
                                             <span class="font-medium text-gray-800">{{ $request->follower->name }}</span>
                                         </div>
                     
@@ -27,14 +29,14 @@
                                             <form action="{{ route('acceptFollow', $request->follower->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
-                                                    Accept ✅
+                                                    Accept 
                                                 </button>
                                             </form>
                     
                                             <form action="{{ route('rejectFollow', $request->follower->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
-                                                    Reject ❌
+                                                    Reject 
                                                 </button>
                                             </form>
                                         </div>

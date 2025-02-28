@@ -64,7 +64,6 @@
                 @enderror
             </div>
         
-            <!-- Confirm New Password -->
             <div>
                 <label for="password_confirmation" class="block text-sm text-gray-600">Confirm New Password</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" class="mt-2 px-4 py-2 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
