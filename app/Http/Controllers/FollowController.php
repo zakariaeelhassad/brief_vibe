@@ -86,6 +86,24 @@ class FollowController extends Controller
         return view('friends', compact('friends'));
     }
 
+    public function unfollow($userId)
+    {
+        $user = auth()->user();
+
+        $follow = Follow::where('follower_id', $user->id)
+                        ->where('following_id', $userId)
+                        ->where('status', 'accepted')
+                        ->first();
+
+        if ($follow) {
+            $follow->delete();
+            return redirect()->back()->with('success', 'You have unfollowed this user.');
+        }
+
+        return redirect()->back()->with('error', 'You are not following this user.');
+    }
+
+
 
 
 
